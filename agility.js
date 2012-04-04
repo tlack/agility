@@ -1136,9 +1136,6 @@
 			});
 			url = url + '?' + parts.join('&');
 		}
-		console.log(this._data.persist.extra_args);
-		console.log(url);
-
     var params = $.extend({
       dataType: 'json',
       url: url
