@@ -1128,10 +1128,21 @@
 
   // RESTful JSON adapter using jQuery's ajax()
   agility.adapter.restful = function(_params){
+		var url = (this._data.persist.baseUrl || 'api/') + this._data.persist.collection + (_params.id ? '/'+_params.id : '');
+		if (this._data.persist.extra_args) {
+			var parts = [];
+			$.each(this._data.persist.extra_args, function(idx, val) {
+				parts.push(idx + '=' + encodeURIComponent(val));
+			});
+			url = url + '?' + parts.join('&');
+		}
+		console.log(this._data.persist.extra_args);
+		console.log(url);
+
     var params = $.extend({
       dataType: 'json',
-      url: (this._data.persist.baseUrl || 'api/') + this._data.persist.collection + (_params.id ? '/'+_params.id : '')
-    }, _params);
+      url: url
+		}, _params);
     $.ajax(params);
   };
   
